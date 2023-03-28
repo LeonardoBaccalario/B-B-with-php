@@ -6,44 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.3/dist/full.css" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
-    <title>Home</title>
+    <title>Prenotations</title>
 </head>
 <body>
-    <div class="navbar bg-base-300 rounded-b-2xl mb-2">
-        <div class="flex-1">
-            <a href="index.html" class="btn btn-ghost normal-case text-2xl text-primary font-bold">Bed & Breakfast</a>
-        </div>
-        <div class="flex-none">
-            <ul class="menu menu-horizontal px-1">
-                <li tabindex="0" class="flex justify-center">
-                    <a>
-                        Clienti
-                        <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
-                    </a>
-                    <ul class="bg-base-300 rounded-b-2xl" style="border-top-left-radius: unset;border-top-right-radius: unset">
-                        <li><a href="seepre.php">Prenotazioni</a></li>
-                        <li><a href="addpre.php">Prenotare B&B</a></li>
-                        <li><a href="deletepre.php">Disdire B&B</a></li>
-                    </ul>
-                </li>
-                <li tabindex="0" class="flex justify-center">
-                        <a>
-                            Admin
-                            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
-                        </a>
-                    <ul class="bg-base-300 rounded-b-2xl" style="border-top-left-radius: unset;border-top-right-radius: unset">
-                        <li><a href="seepreadmin.php">Prenotazioni</a></li>
-                        <li><a href="addresidence.php">Soggiorni</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <?php 
+        include '../component/navbar.php';
+        include '../component/db-connection.php';
+        include '../component/login-check.php';
+    ?>
 
     <div class="flex flex-col w-1/3 m-auto items-center">
-        <?php 
-            $mysqli = mysqli_connect("127.0.0.1", "root", "", "db_bed_and_breakfast");
-        ?>
         <form action="" method="post" class="flex flex-col">
             <select name='users' class="select mb-2">
                 <option value="" disabled selected>Insert user</option>
