@@ -1,6 +1,6 @@
 <div class="navbar bg-base-300 rounded-b-2xl mb-2">
     <div class="flex-1">
-        <a href="index.php" class="btn btn-ghost normal-case text-2xl text-primary font-bold">Bacca Bed & Breakfast</a>
+        <a href="../client/index.php" class="btn btn-ghost normal-case text-2xl text-primary font-bold">Bacca Bed & Breakfast</a>
     </div>
     <div class="flex-none">
         <ul class="menu menu-horizontal px-1">
@@ -10,9 +10,16 @@
                     <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
                 </a>
                 <ul class="bg-base-300 rounded-b-2xl" style="border-top-left-radius: unset;border-top-right-radius: unset">
-                    <li><a href="client/seeprenotations.php">Prenotazioni</a></li>
-                    <li><a href="client/addprenotation.php">Prenotare B&B</a></li>
-                    <li><a href="client/deleteprenotation.php">Disdire B&B</a></li>
+                    <li><a href="../client/seeprenotations.php">Prenotazioni</a></li>
+                    <li><a href="../client/addprenotation.php">Prenotare B&B</a></li>
+                    <li><a href="../client/deleteprenotation.php">Disdire B&B</a></li>
+                    <?php
+                        if (isset($_COOKIE['email']) && isset($_COOKIE['password'])) {
+                            echo '<li><a href="../client/logout-client.php">Logout</a></li>';
+                        } else {
+                            echo '<li><a href="../client/login.php">Login</a></li>';
+                        }
+                    ?>
                 </ul>
             </li>
             <li tabindex="0" class="flex justify-center">
@@ -21,9 +28,16 @@
                         <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
                     </a>
                 <ul class="bg-base-300 rounded-b-2xl" style="border-top-left-radius: unset;border-top-right-radius: unset">
-                    <li><a href="admin/seeprenotations.php">Prenotazioni</a></li>
-                    <li><a href="admin/addresidence.php">Soggiorni</a></li>
-                    <li><a href="admin/addadmin.php">Amministrazione</a></li>
+                    <li><a href="../admin/seeprenotations.php">Prenotazioni</a></li>
+                    <li><a href="../admin/soggiorni.php">Soggiorni</a></li>
+                    <li><a href="../admin/addadmin.php">Amministrazione</a></li>
+                    <?php
+                        if (isset($_COOKIE['email-admin']) && isset($_COOKIE['password-admin'])) {
+                            echo '<li><a href="../admin/logout-admin.php">Logout</a></li>';
+                        } else {
+                            echo '<li><a href="../admin/login.php">Login</a></li>';
+                        }
+                    ?>
                 </ul>
             </li>
         </ul>

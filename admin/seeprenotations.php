@@ -9,8 +9,38 @@
     <title>Home</title>
 </head>
 <body>
-    <?php include 'navbar.php'; ?>
+    <?php
+        include '../component/login-check-admin.php';
+        include '../component/navbar.php';
+        include '../component/db-connection.php';
+        setcookie('link-admin', '../admin/seeprenotations.php', time() + 3600, "/"); // 1 hour
+    ?>
 
-    <h1>Lista prenotazioni admin</h1>
+    <div class="flex flex-col w-1/3 m-auto items-center">
+        <table class="text-center border-black border-2">
+            <tr class="text-primary border-2 border-black">
+                <th class="border-2 border-black hover:bg-primary hover:text-white p-2">Data arrivo</th>
+                <th class="border-2 border-black hover:bg-primary hover:text-white p-2">Data partenza</th>
+                <th class="border-2 border-black hover:bg-primary hover:text-white p-2">Camera</th>
+                <th class="border-2 border-black hover:bg-primary hover:text-white p-2">Descrizione</th>
+                <th class="border-2 border-black hover:bg-primary hover:text-white p-2">Posti</th>
+            </tr>
+            <?php
+                if(isset($_COOKIE['user-code'])){
+                    $GLOBALS['user-code'] = $_COOKIE['user-code'];
+                }
+                $prenotazioni = $mysqli->query("SELECT * FROM prenotazioni,camere WHERE prenotazioni.Camera = camere.Numero");
+                while($row = $prenotazioni->fetch_assoc()) {
+                    echo "<tr class='row'>";
+                    echo "<td class='border-2 border-black hover:bg-primary hover:text-white'>".$row['DataArrivo']."</td>";
+                    echo "<td class='border-2 border-black hover:bg-primary hover:text-white'>".$row['DataPartenza']."</td>";
+                    echo "<td class='border-2 border-black hover:bg-primary hover:text-white'>".$row['Camera']."</td>";
+                    echo "<td class='border-2 border-black hover:bg-primary hover:text-white'>".$row['Descrizione']."</td>";
+                    echo "<td class='border-2 border-black hover:bg-primary hover:text-white'>".$row['Posti']."</td>";
+                    echo "</tr>";
+                }
+            ?>
+        </table>
+    </div>
 </body>
 </html>

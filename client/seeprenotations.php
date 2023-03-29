@@ -9,25 +9,14 @@
     <title>Prenotations</title>
 </head>
 <body>
-    <?php 
+    <?php
+        include '../component/login-check.php';
         include '../component/navbar.php';
         include '../component/db-connection.php';
-        include '../component/login-check.php';
+        setcookie('link', '../client/seeprenotations.php', time() + 3600, "/"); // 1 hour
     ?>
 
     <div class="flex flex-col w-1/3 m-auto items-center">
-        <form action="" method="post" class="flex flex-col">
-            <select name='users' class="select mb-2">
-                <option value="" disabled selected>Insert user</option>
-                <?php
-                    $user = $mysqli->query("SELECT * FROM clienti");
-                    while($row = $user->fetch_assoc()) {
-                        echo "<option value=".$row['Codice'].">".$row['Nome']." ".$row['Cognome']."</option>";
-                    }
-                ?>
-            </select>
-            <input type="submit" value="Visualizza prenotazioni" class="btn mb-2 text-white rounded-full hover:bg-primary hover:border-primary">
-        </form>
         <table class="text-center border-black border-2">
             <tr class="text-primary border-2 border-black">
                 <th class="border-2 border-black hover:bg-primary hover:text-white p-2">Data arrivo</th>
@@ -37,17 +26,18 @@
                 <th class="border-2 border-black hover:bg-primary hover:text-white p-2">Posti</th>
             </tr>
             <?php
-                if(isset($_POST['users'])){
-                    $prenotazioni = $mysqli->query("SELECT * FROM prenotazioni,camere WHERE Cliente = ".$_POST['users']." AND prenotazioni.Camera = camere.Numero");
-                    while($row = $prenotazioni->fetch_assoc()) {
-                        echo "<tr class='row'>";
-                        echo "<td class='border-2 border-black hover:bg-primary hover:text-white'>".$row['DataArrivo']."</td>";
-                        echo "<td class='border-2 border-black hover:bg-primary hover:text-white'>".$row['DataPartenza']."</td>";
-                        echo "<td class='border-2 border-black hover:bg-primary hover:text-white'>".$row['Camera']."</td>";
-                        echo "<td class='border-2 border-black hover:bg-primary hover:text-white'>".$row['Descrizione']."</td>";
-                        echo "<td class='border-2 border-black hover:bg-primary hover:text-white'>".$row['Posti']."</td>";
-                        echo "</tr>";
-                    }
+                if(isset($_COOKIE['user-code'])){
+                    $GLOBALS['user-code'] = $_COOKIE['user-code'];
+                }
+                $prenotazioni = $mysqli->query("SELECT * FROM prenotazioni,camere WHERE prenotazioni.Cliente = ".$GLOBALS['user-code']." AND prenotazioni.Camera = camere.Numero");
+                while($row = $prenotazioni->fetch_assoc()) {
+                    echo "<tr class='row'>";
+                    echo "<td class='border-2 border-black hover:bg-primary hover:text-white'>".$row['DataArrivo']."</td>";
+                    echo "<td class='border-2 border-black hover:bg-primary hover:text-white'>".$row['DataPartenza']."</td>";
+                    echo "<td class='border-2 border-black hover:bg-primary hover:text-white'>".$row['Camera']."</td>";
+                    echo "<td class='border-2 border-black hover:bg-primary hover:text-white'>".$row['Descrizione']."</td>";
+                    echo "<td class='border-2 border-black hover:bg-primary hover:text-white'>".$row['Posti']."</td>";
+                    echo "</tr>";
                 }
             ?>
         </table>

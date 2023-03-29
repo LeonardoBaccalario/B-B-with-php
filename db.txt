@@ -1,5 +1,12 @@
 CREATE DATABASE DB_Bed_and_Breakfast;
 
+CREATE TABLE admin (
+    codice INTEGER AUTO_INCREMENT,
+    email varchar(100),
+    password varchar(60),
+    PRIMARY KEY (codice)
+);
+
 CREATE TABLE Clienti (
 
 Codice integer AUTO_INCREMENT,
@@ -14,7 +21,7 @@ Telefono varCHAR(15) NOT NULL,
 
 Email varCHAR(30),
 
-Password varCHAR(30),
+Password varCHAR(60),
 
 PRIMARY KEY (Codice)
 
@@ -44,8 +51,6 @@ DataArrivo DATE,
 
 DataPartenza DATE,
 
-Disdetta BIT DEFAULT 0,
-
 PRIMARY KEY (ID),
 
 FOREIGN KEY (Cliente) REFERENCES Clienti(Codice),
@@ -70,14 +75,18 @@ FOREIGN KEY (Prenotazione) REFERENCES Prenotazioni(ID)
 
 );
 
-INSERT INTO `clienti`( `Cognome`, `Nome`, `Indirizzo`, `Telefono`, `Email`) VALUES ("Bottari", "Barbara", "Via Moretto 13", "123123123", "barbara@bottari.it");
+INSERT INTO `clienti`( `Cognome`, `Nome`, `Indirizzo`, `Telefono`, `Email`, `Password`) VALUES ("Bottari", "Barbara", "Via Moretto 13", "123123123", "barbara@bottari.it", "$2y$10$lxjExuVF35/GP.rGYb2gPeCSO/kXNv25kper39udAEYJl6eK4WWOi");
 
-INSERT INTO `clienti`( `Cognome`, `Nome`, `Indirizzo`, `Telefono`, `Email`) VALUES ("Tobia", "Donato", "Via del Risorgimento 12", "111222333", "tobia@donato.it");
+INSERT INTO `clienti`( `Cognome`, `Nome`, `Indirizzo`, `Telefono`, `Email`, `Password`) VALUES ("Tobia", "Donato", "Via del Risorgimento 12", "111222333", "tobia@donato.it", "$2y$10$fKwwzdSkxx0ZmdtAj3djmOD.VAzgM4Vi7slbjQl0.nH8DIS6X1BtK");
 
-INSERT INTO `clienti`( `Cognome`, `Nome`, `Indirizzo`, `Telefono`, `Email`) VALUES ("Baudo", "Giuseppe", "Via del Mare 77", "6767676767", "pippo@baudo.it");
+INSERT INTO `clienti`( `Cognome`, `Nome`, `Indirizzo`, `Telefono`, `Email`, `Password`) VALUES ("Baudo", "Giuseppe", "Via del Mare 77", "6767676767", "pippo@baudo.it", "$2y$10$Vqw0qmoLgYpIMtUZQJ23HeUIJ1SW7syhq9RdUhCc4TUCWyMCdh9ei");
+
+INSERT INTO `clienti`( `Cognome`, `Nome`, `Indirizzo`, `Telefono`, `Email`, `Password`) VALUES ("Baccalario", "Leonardo", "Via M. L. King 48", "4587230932", "leonardobaccalario@gmail.com", "$2y$10$M4emP7VSnh05m8NXKRUOl.YomJ8/ju5WvHuXqsj8G48QqRalwtceK");
 
 INSERT INTO `camere`( `Descrizione`, `Posti`) VALUES ( "Ciclamini", 3), ( "Rose", 2), ( "Girasoli", 4), ( "Peonie", 2);
 
 INSERT INTO `prenotazioni`( `Cliente`, `Camera`, `DataArrivo`, `DataPartenza`, `Disdetta`) VALUES ( "1", 1, "2021-07-15", "2021-07-31",0), ( "2", 2, "2021-07-01","2021-07-31",0), ( "3", 3, "2021-06-25", "2021-07-25",0), ( "1", 1, "2021-12-01", "2021-12-31",0);
 
 INSERT INTO `soggiorni`(`Prenotazione`, `Cliente`, `Documento`) VALUES (1, 1, "CI"), (2,2, "Patente"), (3, 1, "CI"), (4, 3, "Passaporto");
+
+INSERT INTO `admin`(`email`, `password`) VALUES ("leonardobaccalario@gmail.com","$2y$10$28xS74FpnRqsjAmQP9Z4hOlZ6irMeXm/jBGjdE2HiPm2M2G3951KW");
