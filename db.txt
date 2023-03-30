@@ -85,7 +85,7 @@ INSERT INTO `clienti`( `Cognome`, `Nome`, `Indirizzo`, `Telefono`, `Email`, `Pas
 
 INSERT INTO `camere`( `Descrizione`, `Posti`) VALUES ( "Ciclamini", 3), ( "Rose", 2), ( "Girasoli", 4), ( "Peonie", 2);
 
-INSERT INTO `prenotazioni`( `Cliente`, `Camera`, `DataArrivo`, `DataPartenza`, `Disdetta`) VALUES ( "1", 1, "2021-07-15", "2021-07-31",0), ( "2", 2, "2021-07-01","2021-07-31",0), ( "3", 3, "2021-06-25", "2021-07-25",0), ( "1", 1, "2021-12-01", "2021-12-31",0);
+INSERT INTO `prenotazioni`( `Cliente`, `Camera`, `DataArrivo`, `DataPartenza`) VALUES ( "1", 1, "2021-07-15", "2021-07-31"), ( "2", 2, "2021-07-01","2021-07-31"), ( "3", 3, "2021-06-25", "2021-07-25"), ( "1", 1, "2021-12-01", "2021-12-31");
 
 INSERT INTO `soggiorni`(`Prenotazione`, `Cliente`, `Documento`) VALUES (1, 1, "CI"), (2,2, "Patente"), (3, 1, "CI"), (4, 3, "Passaporto");
 
